@@ -6,13 +6,10 @@ namespace BlogAPI.Database
 {
     public class BlogDb : DbContext
     {
-        public BlogDb(DbContextOptions<BlogDb> options, DbSet<Author> authors, DbSet<Article> articles, DbSet<Comment> comments, DbSet<AuthorArticle> authorArticles) : base(options)
+        public BlogDb(DbContextOptions<BlogDb> options) : base(options)
         {
-            Authors = authors;
-            Articles = articles;
-            Comments = comments;
-            AuthorArticles = authorArticles;
         }
+
         public DbSet<Author> Authors { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
