@@ -1,4 +1,7 @@
 
+using BlogAPI.Database;
+using Microsoft.EntityFrameworkCore;
+
 namespace BlogAPI
 {
     public class Program
@@ -7,7 +10,8 @@ namespace BlogAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.Services.AddDbContext<BlogDb>(options =>
+               options.UseSqlServer(builder.Configuration.GetConnectionString(@"Server=(localdb)\mssqllocaldb;Database=BlogAPIDb;Trusted_Connection=True")));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
