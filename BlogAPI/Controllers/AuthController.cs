@@ -10,10 +10,9 @@ namespace BlogAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class AuthController : ControllerBase
     {
-        public static Author author = new();
+        public static User user = new();
         private readonly IConfiguration _configuration;
 
         public AuthController(IConfiguration configuration)
@@ -22,36 +21,36 @@ namespace BlogAPI.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult<Author> Register(AuthorDto request)
+        public ActionResult<User> Register(UserDto request)
         {
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
 
-            author.Username = request.Username;
-            author.PasswordHash = passwordHash;
+            user.Username = request.Username;
+            user.PasswordHash = passwordHash;
 
-            return Ok(author);
+            return Ok(user);
         }
 
         [HttpPost("Login")]
-        public ActionResult<Author> Login(AuthorDto request)
+        public ActionResult<User> Login(UserDto request)
         {
-            if (author.Username != request.Username)
+            if (user.Username != request.Username)
             {
                 return BadRequest("author not found.");
             }
 
-            if (!BCrypt.Net.BCrypt.Verify(request.Password, author.PasswordHash))
+            if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             {
                 return BadRequest("Wrong password");
             }
 
-            var token = CreateToken(author);
+            var token = CreateToken(user);
 
             return Ok(token);
         }
 
-        private string CreateToken(Author user)
+        private string CreateToken(User user)
         {
             var claims = new List<Claim>
             {

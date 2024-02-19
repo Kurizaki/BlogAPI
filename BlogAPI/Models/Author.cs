@@ -7,24 +7,17 @@ namespace BlogAPI.Models
         [Key]
         public int AuthorId { get; set; }
 
-        [Required]
         [MaxLength(50)]
-        public string Name { get; set; } = string.Empty;
+        public required string Name { get; set; }
 
-        [Required]
         [MaxLength(50)]
-        public string Username { get; set; } = string.Empty;
+        public required string Username { get; set; }
 
-        [Required]
         [MaxLength(255)]
         [EmailAddress]
-        public string EMail { get; set; } = string.Empty;
+        public required string EMail { get; set; }
 
         [Required]
         public DateTime BirthDate { get; set; }
-
-        [Required]
-        [MaxLength(86)]
-        public string PasswordHash { get; set; } = string.Empty;
     }
 }
