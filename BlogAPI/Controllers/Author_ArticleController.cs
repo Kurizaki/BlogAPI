@@ -1,5 +1,6 @@
 ﻿using BlogAPI.Database;
 using BlogAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace BlogAPI.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthorArticleController : ControllerBase
     {
         private readonly BlogDb _context;

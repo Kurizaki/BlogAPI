@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using BlogAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -9,6 +10,7 @@ namespace BlogAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthController : ControllerBase
     {
         public static Author author = new();
